@@ -11,12 +11,16 @@ function Profile() {
   const joinedGroups = groups.filter((group) =>
     group.memberIds.includes(currentUser.id)
   );
+  const joinedGroupIds = joinedGroups.map((group) => group.id);
   const uploadedResources = resources.filter(
     (resource) => resource.uploadedBy === currentUser.name
   );
   const authoredPosts = posts.filter((post) => post.authorName === currentUser.name);
   const activeTasks = tasks.filter(
-    (task) => task.status !== "done" && !isPastDate(task.dueDate)
+    (task) =>
+      joinedGroupIds.includes(task.assignedGroup) &&
+      task.status !== "done" &&
+      !isPastDate(task.dueDate)
   );
 
   return (

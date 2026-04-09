@@ -20,11 +20,21 @@ function Dashboard() {
   const joinedGroups = groups.filter((group) =>
     group.memberIds.includes(currentUser.id)
   );
+  const joinedGroupIds = joinedGroups.map((group) => group.id);
   const upcomingTasks = tasks.filter(
-    (task) => task.status !== "done" && !isPastDate(task.dueDate)
+    (task) =>
+      joinedGroupIds.includes(task.assignedGroup) &&
+      task.status !== "done" &&
+      !isPastDate(task.dueDate)
   );
-  const recentPosts = posts;
-  const recentResources = resources;
+  const personalResources = resources.filter(
+    (resource) => resource.uploadedBy === currentUser.name
+  );
+  const personalPosts = posts.filter((post) => post.authorName === currentUser.name);
+  const recentPosts = posts.filter((post) => joinedGroupIds.includes(post.groupId));
+  const recentResources = resources.filter((resource) =>
+    joinedGroupIds.includes(resource.groupId)
+  );
 
   const stats = [
     {
@@ -33,17 +43,15 @@ function Dashboard() {
     },
     {
       label: "Open tasks",
-      value: tasks.filter(
-        (task) => task.status !== "done" && !isPastDate(task.dueDate)
-      ).length,
+      value: upcomingTasks.length,
     },
     {
       label: "Shared resources",
-      value: resources.length,
+      value: personalResources.length,
     },
     {
       label: "Discussion posts",
-      value: posts.length,
+      value: personalPosts.length,
     },
   ];
 
