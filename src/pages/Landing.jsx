@@ -6,7 +6,7 @@ function Landing() {
     <div className="landing-page">
       <section className="hero-section">
         <div className="hero-copy fade-up">
-          <p className="eyebrow">Capstone-ready React project</p>
+          <p className="eyebrow">Student Communication Hub</p>
           <h1>One workspace for study groups, shared notes, and deadlines.</h1>
           <p className="hero-text">
             Student Collaboration Hub brings scattered class coordination into
