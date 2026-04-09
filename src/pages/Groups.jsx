@@ -7,12 +7,14 @@ import "../pages-styling/groups.css";
 
 function Groups() {
   const { currentUser } = useAuth();
-  const { groups, createGroup, joinGroup } = useHub();
+  const { groups, createGroup, joinGroup, leaveGroup } = useHub();
   const [searchTerm, setSearchTerm] = useState("");
+  const [feedback, setFeedback] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     subject: "",
     description: "",
+    accessType: "public",
   });
 
   const filteredGroups = groups.filter((group) =>
@@ -24,7 +26,17 @@ function Groups() {
   const handleCreateGroup = (event) => {
     event.preventDefault();
     createGroup({ ...formData, user: currentUser });
-    setFormData({ name: "", subject: "", description: "" });
+    setFeedback(
+      formData.accessType === "private"
+        ? "Private group created successfully."
+        : "Public group created successfully."
+    );
+    setFormData({
+      name: "",
+      subject: "",
+      description: "",
+      accessType: "public",
+    });
   };
 
   return (
@@ -46,11 +58,13 @@ function Groups() {
             <h3>Find groups</h3>
           </div>
 
+          {feedback ? <p className="group-feedback">{feedback}</p> : null}
+
           <label className="full-width">
             Search
             <input
               type="search"
-              placeholder="React, database, UI..."
+              placeholder="Search the group you want to join..."
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
@@ -62,6 +76,20 @@ function Groups() {
             emptyMessage="No groups match your search yet."
             renderItem={(group) => {
               const isMember = group.memberIds.includes(currentUser.id);
+              const isLeader = group.leaderId === currentUser.id;
+              const hasPendingRequest = group.joinRequests?.some(
+                (request) => request.userId === currentUser.id
+              );
+
+              const handleJoinAction = () => {
+                const result = joinGroup({ groupId: group.id, user: currentUser });
+                setFeedback(result.message);
+              };
+
+              const handleLeaveAction = () => {
+                const result = leaveGroup({ groupId: group.id, user: currentUser });
+                setFeedback(result.message);
+              };
 
               return (
                 <article key={group.id} className="info-card">
@@ -69,20 +97,46 @@ function Groups() {
                   <h3>{group.name}</h3>
                   <p>{group.description}</p>
                   <div className="meta-row">
+                    <span className={`access-pill ${group.accessType}`}>
+                      {group.accessType}
+                    </span>
                     <span>{group.memberIds.length} members</span>
                     <span>Lead: {group.leaderName}</span>
+                    {isLeader && group.joinRequests.length > 0 ? (
+                      <span>{group.joinRequests.length} pending</span>
+                    ) : null}
                   </div>
                   <div className="button-row">
-                    {!isMember ? (
+                    {!isMember && !hasPendingRequest ? (
                       <button
                         type="button"
                         className="secondary-button"
-                        onClick={() => joinGroup({ groupId: group.id, user: currentUser })}
+                        onClick={handleJoinAction}
                       >
-                        Join group
+                        {group.accessType === "private" ? "Request to join" : "Join group"}
+                      </button>
+                    ) : null}
+
+                    {hasPendingRequest ? (
+                      <span className="status-pill in-progress">Request pending</span>
+                    ) : null}
+
+                    {isLeader ? (
+                      <span className="status-pill done">Admin</span>
+                    ) : null}
+
+                    {isMember && !isLeader ? (
+                      <button
+                        type="button"
+                        className="ghost-button"
+                        onClick={handleLeaveAction}
+                      >
+                        Leave group
                       </button>
                     ) : (
-                      <span className="status-pill done">Member</span>
+                      isMember && !hasPendingRequest ? (
+                        <span className="status-pill done">Member</span>
+                      ) : null
                     )}
                     <Link to={`/groups/${group.id}`} className="text-link">
                       Open group
@@ -143,6 +197,22 @@ function Groups() {
                 }
                 required
               />
+            </label>
+
+            <label>
+              Group access
+              <select
+                value={formData.accessType}
+                onChange={(event) =>
+                  setFormData((previous) => ({
+                    ...previous,
+                    accessType: event.target.value,
+                  }))
+                }
+              >
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+              </select>
             </label>
 
             <button type="submit" className="primary-button full-width">

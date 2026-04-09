@@ -6,7 +6,10 @@ export const seedGroups = [
     description:
       "Weekly check-ins for component design, hooks practice, and capstone support.",
     leaderName: "Amina Hassan",
+    leaderId: "user-2",
+    accessType: "private",
     memberIds: ["user-demo", "user-2", "user-3"],
+    joinRequests: [],
     createdAt: "2026-04-01T09:00:00.000Z",
   },
   {
@@ -16,7 +19,16 @@ export const seedGroups = [
     description:
       "Share ERD feedback, SQL exercises, and clean schema notes before submissions.",
     leaderName: "Brian Otieno",
-    memberIds: ["user-2", "user-4"],
+    leaderId: "user-3",
+    accessType: "private",
+    memberIds: ["user-3", "user-4"],
+    joinRequests: [
+      {
+        userId: "user-demo",
+        userName: "Demo Student",
+        requestedAt: "2026-04-08T09:10:00.000Z",
+      },
+    ],
     createdAt: "2026-03-28T11:30:00.000Z",
   },
   {
@@ -25,8 +37,17 @@ export const seedGroups = [
     subject: "Product Design",
     description:
       "Peer review flows, improve accessibility, and prepare polished demo screens.",
-    leaderName: "Linet Njeri",
-    memberIds: ["user-demo", "user-5"],
+    leaderName: "Demo Student",
+    leaderId: "user-demo",
+    accessType: "private",
+    memberIds: ["user-demo", "user-4"],
+    joinRequests: [
+      {
+        userId: "user-2",
+        userName: "Amina Hassan",
+        requestedAt: "2026-04-09T08:20:00.000Z",
+      },
+    ],
     createdAt: "2026-04-03T14:15:00.000Z",
   },
 ];
@@ -64,6 +85,9 @@ export const seedResources = [
     title: "React Routing Summary",
     type: "Link",
     link: "https://reactrouter.com/en/main/start/overview",
+    content: "",
+    fileData: "",
+    fileName: "",
     subject: "Frontend Development",
     groupId: "grp-react",
     uploadedBy: "Amina Hassan",
@@ -74,6 +98,9 @@ export const seedResources = [
     title: "Normalization Notes",
     type: "PDF",
     link: "https://example.com/normalization-notes.pdf",
+    content: "",
+    fileData: "",
+    fileName: "",
     subject: "Database Systems",
     groupId: "grp-db",
     uploadedBy: "Brian Otieno",
@@ -83,7 +110,11 @@ export const seedResources = [
     id: "res-3",
     title: "Accessibility Checklist",
     type: "Note",
-    link: "https://example.com/accessibility-checklist",
+    link: "",
+    content:
+      "Check color contrast, heading structure, button labels, keyboard navigation, and responsive spacing before demo day.",
+    fileData: "",
+    fileName: "",
     subject: "Product Design",
     groupId: "grp-ui",
     uploadedBy: "Demo Student",
@@ -115,5 +146,13 @@ export const seedTasks = [
     status: "todo",
     assignedGroup: "grp-react",
     createdBy: "Amina Hassan",
+  },
+  {
+    id: "task-4",
+    title: "Compile usability feedback notes",
+    dueDate: "2026-04-08",
+    status: "done",
+    assignedGroup: "grp-ui",
+    createdBy: "Demo Student",
   },
 ];

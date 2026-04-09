@@ -10,3 +10,33 @@
 .find-groups-panel .info-card {
   background: linear-gradient(180deg, rgba(244, 252, 246, 0.92), rgba(228, 243, 232, 0.84));
 }
+
+.find-groups-panel .info-card .meta-row {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(30, 91, 58, 0.14);
+  gap: 0.75rem;
+}
+
+.find-groups-panel .info-card .meta-row span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(159, 227, 194, 0.22);
+  color: var(--jungle);
+  font-weight: 700;
+}
+
+.find-groups-panel .info-card .button-row {
+  margin-top: 0.9rem;
+  padding-top: 0.2rem;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.find-groups-panel .info-card .text-link {
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(77, 143, 86, 0.12);
+}

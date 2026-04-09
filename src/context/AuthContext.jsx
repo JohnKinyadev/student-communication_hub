@@ -22,6 +22,22 @@ const demoUsers = [
     course: "Frontend Development",
     role: "Group Leader",
   },
+  {
+    id: "user-3",
+    name: "Brian Otieno",
+    email: "brian@studenthub.com",
+    password: "password123",
+    course: "Database Systems",
+    role: "Group Leader",
+  },
+  {
+    id: "user-4",
+    name: "Linet Njeri",
+    email: "linet@studenthub.com",
+    password: "password123",
+    course: "Product Design",
+    role: "Group Leader",
+  },
 ];
 
 function getStoredValue(key, fallback) {

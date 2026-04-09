@@ -17,7 +17,9 @@ function Resources() {
   const [filterType, setFilterType] = useState("All");
 
   const filteredResources = resources.filter((resource) => {
-    const matchesSearch = `${resource.title} ${resource.subject} ${resource.uploadedBy}`
+    const matchesSearch = `${resource.title} ${resource.subject} ${resource.uploadedBy} ${
+      resource.content || ""
+    }`
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
     const matchesType = filterType === "All" || resource.type === filterType;
@@ -30,10 +32,10 @@ function Resources() {
       <section className="page-hero">
         <div>
           <p className="eyebrow">Resources</p>
-          <h2>Search notes, links, and PDFs across your study hub.</h2>
+          <h2>Search notes, media, links, and PDFs across your study hub.</h2>
           <p>
-            Keep revision material attached to the right subject and make it easy
-            for classmates to find useful content fast.
+            Keep revision material, pictures, short videos, and study notes
+            attached to the right subject so classmates can find useful content fast.
           </p>
         </div>
       </section>
@@ -60,6 +62,8 @@ function Resources() {
               <option>Link</option>
               <option>PDF</option>
               <option>Note</option>
+              <option>Image</option>
+              <option>Video</option>
             </select>
           </label>
         </div>
@@ -82,14 +86,37 @@ function Resources() {
                   <span>By {resource.uploadedBy}</span>
                   <span>{formatDate(resource.createdAt)}</span>
                 </div>
-                <a
-                  href={resource.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="primary-button full-width"
-                >
-                  Open resource
-                </a>
+                {resource.type === "Note" && resource.content ? (
+                  <p className="resource-note-preview">{resource.content}</p>
+                ) : null}
+                {resource.type === "Image" && resource.fileData ? (
+                  <img
+                    src={resource.fileData}
+                    alt={resource.title}
+                    className="resource-preview-image"
+                  />
+                ) : null}
+                {resource.type === "Video" && resource.fileData ? (
+                  <video
+                    src={resource.fileData}
+                    controls
+                    className="resource-preview-video"
+                  />
+                ) : null}
+                {resource.link ? (
+                  <a
+                    href={resource.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="primary-button full-width"
+                  >
+                    Open resource
+                  </a>
+                ) : resource.fileName ? (
+                  <span className="resource-file-name">{resource.fileName}</span>
+                ) : (
+                  <span className="status-pill done">Saved note</span>
+                )}
               </article>
             );
           }}

@@ -1,20 +1,7 @@
-.subsection-heading {
-  margin: 0.5rem 0;
-}
-
-.request-card {
-  align-items: center;
-}
-
-.request-card .button-row {
-  justify-content: flex-end;
-}
-
-.resource-snippet,
 .resource-note-preview {
-  margin-top: 0.65rem;
-  padding: 0.75rem 0.9rem;
-  border-radius: 14px;
+  margin-top: 0.85rem;
+  padding: 0.85rem 0.95rem;
+  border-radius: 16px;
   background: rgba(241, 249, 242, 0.84);
   border: 1px solid rgba(15, 122, 69, 0.12);
   white-space: pre-wrap;
@@ -23,12 +10,16 @@
 .resource-preview-image,
 .resource-preview-video {
   display: block;
-  width: min(100%, 240px);
-  margin-top: 0.75rem;
-  border-radius: 16px;
+  width: 100%;
+  margin-top: 0.85rem;
+  border-radius: 18px;
   border: 1px solid rgba(15, 122, 69, 0.12);
-  object-fit: cover;
   background: rgba(220, 237, 225, 0.72);
+  object-fit: cover;
+}
+
+.resource-preview-image {
+  max-height: 220px;
 }
 
 .resource-preview-video {
@@ -38,7 +29,9 @@
 .resource-file-name {
   display: inline-flex;
   align-items: center;
-  padding: 0.45rem 0.8rem;
+  justify-content: center;
+  margin-top: 0.85rem;
+  padding: 0.55rem 0.9rem;
   border-radius: 999px;
   background: rgba(159, 227, 194, 0.22);
   color: var(--jungle);
