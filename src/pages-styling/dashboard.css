@@ -1,0 +1,14 @@
+.task-panel,
+.discussion-panel,
+.resources-panel {
+  background: linear-gradient(180deg, rgba(239, 248, 239, 0.9), rgba(223, 238, 226, 0.8));
+}
+
+.joined-groups-panel {
+  background: linear-gradient(180deg, rgba(232, 246, 233, 0.92), rgba(212, 235, 214, 0.82));
+  border-color: rgba(77, 143, 86, 0.3);
+}
+
+.joined-groups-panel .list-card {
+  background: linear-gradient(180deg, rgba(244, 252, 246, 0.92), rgba(228, 243, 232, 0.84));
+}
