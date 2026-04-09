@@ -43,7 +43,7 @@ body {
   background-image:
     linear-gradient(180deg, rgba(231, 241, 234, 0.9), rgba(216, 230, 220, 0.94)),
     linear-gradient(135deg, rgba(10, 90, 51, 0.22), rgba(139, 195, 74, 0.12)),
-    url("../images/background.jpg");
+    url("/images/background.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
