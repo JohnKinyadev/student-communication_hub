@@ -20,6 +20,7 @@ function Tasks() {
   const [taskError, setTaskError] = useState("");
   const [formData, setFormData] = useState({
     title: "",
+    description: "",
     dueDate: "",
     assignedGroup: groups[0]?.id || "",
   });
@@ -64,6 +65,7 @@ function Tasks() {
     setTaskError("");
     setFormData({
       title: "",
+      description: "",
       dueDate: "",
       assignedGroup: groups[0]?.id || "",
     });
@@ -98,6 +100,20 @@ function Tasks() {
                   setFormData((previous) => ({
                     ...previous,
                     title: event.target.value,
+                  }))
+                }
+                required
+              />
+            </label>
+
+            <label>
+              Description
+              <textarea
+                value={formData.description}
+                onChange={(event) =>
+                  setFormData((previous) => ({
+                    ...previous,
+                    description: event.target.value,
                   }))
                 }
                 required
@@ -178,6 +194,7 @@ function Tasks() {
                       <p>
                         {group?.name || "No group"} - Due {formatDate(task.dueDate)}
                       </p>
+                      <p className="task-description">{task.description || "No description provided."}</p>
                     </div>
 
                     <div className="button-row">
@@ -217,6 +234,7 @@ function Tasks() {
                       <p>
                         {group?.name || "No group"} - Due {formatDate(task.dueDate)}
                       </p>
+                      <p className="task-description">{task.description}</p>
                     </div>
                     <div className="button-row">
                       <span className="status-pill overdue">Past due</span>
@@ -255,6 +273,7 @@ function Tasks() {
                       <p>
                         {group?.name || "No group"} - Due {formatDate(task.dueDate)}
                       </p>
+                      <p className="task-description">{task.description}</p>
                     </div>
                     <div className="button-row">
                       <span className="status-pill done">Completed</span>

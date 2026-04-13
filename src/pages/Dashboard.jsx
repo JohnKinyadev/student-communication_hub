@@ -96,6 +96,7 @@ function Dashboard() {
                 <div>
                   <strong>{task.title}</strong>
                   <p>Due {formatDate(task.dueDate)}</p>
+                  <p className="task-description">{task.description || "No description provided."}</p>
                 </div>
                 <span className={`status-pill ${task.status}`}>{task.status}</span>
               </div>

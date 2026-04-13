@@ -1,13 +1,21 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "../pages-styling/landing.css";
 
 function Landing() {
+  const { currentUser, isAuthenticated } = useAuth();
+
   return (
     <div className="landing-page">
+      {isAuthenticated && (
+        <div className="login-status">
+          <p>Welcome back, <strong>{currentUser?.name}</strong>! You are logged in.</p>
+        </div>
+      )}
       <section className="hero-section">
         <div className="hero-copy fade-up">
           <p className="eyebrow">Student Communication Hub</p>
-          <h1>One workspace for study groups, shared notes, and deadlines.</h1>
+          <h2>One workspace for study groups, shared notes, and deadlines.</h2>
           <p className="hero-text">
             Student Collaboration Hub brings scattered class coordination into
             one dashboard so teams can discuss, share, and actually stay on
@@ -17,7 +25,7 @@ function Landing() {
 
           <div className="hero-actions">
             <Link to="/register" className="primary-button">
-              Start the Project
+              Get Started
             </Link>
             <Link to="/login" className="secondary-button">
               Use Demo Login

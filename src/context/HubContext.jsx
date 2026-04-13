@@ -284,7 +284,7 @@ export function HubProvider({ children }) {
 
         setResources((previousResources) => [resource, ...previousResources]);
       },
-      addTask: ({ title, dueDate, assignedGroup, user }) => {
+      addTask: ({ title, description, dueDate, assignedGroup, user }) => {
         if (isPastDate(dueDate)) {
           return {
             success: false,
@@ -292,9 +292,17 @@ export function HubProvider({ children }) {
           };
         }
 
+        if (!description?.trim()) {
+          return {
+            success: false,
+            message: "Please add a description so the task is clearly defined.",
+          };
+        }
+
         const task = {
           id: `task-${Date.now()}`,
           title,
+          description: description.trim(),
           dueDate,
           status: "todo",
           assignedGroup,

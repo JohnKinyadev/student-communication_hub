@@ -19,6 +19,7 @@ function Navbar() {
       </div>
 
       <nav className="nav-links">
+        <NavLink to="/">Home</NavLink>
         <NavLink to="/dashboard">Dashboard</NavLink>
         <NavLink to="/groups">Groups</NavLink>
         <NavLink to="/resources">Resources</NavLink>

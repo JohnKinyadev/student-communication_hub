@@ -4,6 +4,25 @@
   padding: 1.2rem 0 3rem;
 }
 
+.login-status {
+  background: linear-gradient(145deg, rgba(76, 175, 80, 0.1), rgba(56, 142, 60, 0.1));
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  color: #2e7d32;
+  font-weight: 500;
+  text-align: center;
+}
+
+.login-status p {
+  margin: 0;
+}
+
+.login-status strong {
+  color: #1b5e20;
+}
+
 .hero-section {
   display: grid;
   grid-template-columns: 1.2fr 0.9fr;
@@ -31,9 +50,9 @@
   box-shadow: var(--shadow);
 }
 
-.hero-copy h1 {
-  font-size: clamp(2.7rem, 5vw, 4.8rem);
-  max-width: 12ch;
+.hero-copy h2 {
+  font-size: clamp(2.2rem, 2.2vw, 2.8rem);
+  max-width: 25ch;
 }
 
 .hero-text {

@@ -51,6 +51,7 @@ function GroupDetails() {
   });
   const [taskForm, setTaskForm] = useState({
     title: "",
+    description: "",
     dueDate: "",
   });
   const [taskError, setTaskError] = useState("");
@@ -163,6 +164,7 @@ function GroupDetails() {
     event.preventDefault();
     const result = addTask({
       title: taskForm.title,
+      description: taskForm.description,
       dueDate: taskForm.dueDate,
       assignedGroup: groupId,
       user: currentUser,
@@ -174,7 +176,7 @@ function GroupDetails() {
     }
 
     setTaskError("");
-    setTaskForm({ title: "", dueDate: "" });
+    setTaskForm({ title: "", description: "", dueDate: "" });
   };
 
   const handleJoinGroup = () => {
@@ -485,6 +487,20 @@ function GroupDetails() {
               </label>
 
               <label>
+                Description
+                <textarea
+                  value={taskForm.description}
+                  onChange={(event) =>
+                    setTaskForm((previous) => ({
+                      ...previous,
+                      description: event.target.value,
+                    }))
+                  }
+                  required
+                />
+              </label>
+
+              <label>
                 Due date
                 <input
                   type="date"
@@ -523,6 +539,7 @@ function GroupDetails() {
                 <div>
                   <strong>{task.title}</strong>
                   <p>Due {formatDate(task.dueDate)}</p>
+                  <p className="task-description">{task.description || "No description provided."}</p>
                 </div>
                 <div className="button-row">
                   <span className={`status-pill ${task.status}`}>{task.status}</span>
@@ -553,6 +570,7 @@ function GroupDetails() {
                 <div>
                   <strong>{task.title}</strong>
                   <p>Due {formatDate(task.dueDate)}</p>
+                  <p className="task-description">{task.description || "No description provided."}</p>
                 </div>
                 <div className="button-row">
                   <span className="status-pill overdue">Past due</span>
@@ -583,6 +601,7 @@ function GroupDetails() {
                 <div>
                   <strong>{task.title}</strong>
                   <p>Due {formatDate(task.dueDate)}</p>
+                  <p className="task-description">{task.description || "No description provided."}</p>
                 </div>
                 <div className="button-row">
                   <span className="status-pill done">Completed</span>

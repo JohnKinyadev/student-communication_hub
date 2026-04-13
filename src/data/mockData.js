@@ -126,6 +126,7 @@ export const seedTasks = [
   {
     id: "task-1",
     title: "Finalize landing page hero section",
+    description: "Refine the hero copy, update CTA styling, and ensure mobile spacing is polished.",
     dueDate: "2026-04-10",
     status: "in-progress",
     assignedGroup: "grp-ui",
@@ -134,6 +135,7 @@ export const seedTasks = [
   {
     id: "task-2",
     title: "Submit SQL indexing exercise",
+    description: "Complete the assignment on query performance and submit the report before deadline.",
     dueDate: "2026-04-12",
     status: "todo",
     assignedGroup: "grp-db",
@@ -142,6 +144,7 @@ export const seedTasks = [
   {
     id: "task-3",
     title: "Review protected routes implementation",
+    description: "Check route guards, authentication redirects, and role-based access for the new dashboard pages.",
     dueDate: "2026-04-09",
     status: "todo",
     assignedGroup: "grp-react",
@@ -150,6 +153,7 @@ export const seedTasks = [
   {
     id: "task-4",
     title: "Compile usability feedback notes",
+    description: "Summarize the user testing feedback and share key improvements with the UI team.",
     dueDate: "2026-04-08",
     status: "done",
     assignedGroup: "grp-ui",
